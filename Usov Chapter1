@@ -1,0 +1,123 @@
+// Глава 1. Отправная точка
+
+//var - оператор для объявления переменной
+var age = 29
+
+//let - оператор для объявления константы
+let name = "Anastasiya"
+
+//print(_:) - функция для вывода в консоль
+print("My name is \(name), I'm \(age) years old")
+
+// Фундаментальные типы данных
+//явное определение типа данных
+let surname: String = "Martyusheva"
+
+//Int - целочисленный тип данных (знаковый). Может быть отрицательные и положительным
+var signedNum: Int = -32
+//Uint - целочисленный тип беззнаковый
+var unsignedNum: UInt = 128
+//Есть еще Int8, Int16, Int32, Int64, UInt8, UInt16, UInt31, UInt64
+
+//min и max методы для получения минимального и максимального числа
+let minInt8 = Int8.min
+let maxInt8 = Int8.max
+
+//Float — позволяет хранить 32-битное число с плавающей точкой, содержащее до 6 знаков в дробной части
+var numFloat: Float = 104.3
+
+//Double — позволяет хранить 64-битное число с плавающей точкой, содержащее до 15 знаков в дробной части
+var numDouble1: Double = 15.4638
+
+//truncatingRemainder(dividingBy:) - метод для получения остатка от деления, котрый применяется к делимому
+var numDouble2: Double = 2.678
+numDouble1.truncatingRemainder(dividingBy: numDouble2)
+ 
+//isMultiple(of:) - метод для определения четности
+
+//init(_:) - метод для приведения одного типа данных в другой
+Int.init(numDouble2)
+//Int(_:) — преобразовывает переданное значение к типу данных Int.
+//Double(_:) — преобразовывает переданное значение к типу данных Double.
+//Float(_:) — преобразовывает переданное значение к типу данных Float.
+let numberInt = 19
+let numberDouble = 3.83588
+let resD = Double(numberInt) * numberDouble
+let resI = numberInt * Int(numberDouble)
+
+//Decimal - число с плавающей точкой отличается от Float и Double тем, что с его помощью можно с высокой точностью проводить операции с числами с плавающей точкой, имеющими базу 10
+let numDecimal: Decimal = 0.1
+
+//Character - тип данных, предназначен для хранения отдельных символов
+let char: Character = "a"
+
+//String - тип данных, предназначен для хранения произвольной текстовой информации
+let lenguage = "Swift"
+//пустые строковые литералы
+var emptyString = ""
+var anotherEmptyString = String()
+//приведение к строковому типу данных
+let someDoubleNumber = 86.9893
+let someStringNumber = String(someDoubleNumber)
+
+//Объединение строк
+//Интерполяция - объединение строковых литералов, переменных, констант и выражений в единое целое
+let namesDragon = "Горыныч"
+let hello = "Привет, меня зовут \(namesDragon)"
+// Конкатенация - объединение нескольких строковых значений в одно с помощью оператора сложения
+let firstText = "Я хочу весить"
+let weight = 55
+let secondText = "килограмм"
+let rsultText = firstText + String(weight) + secondText
+
+//Bool - логический тип данных true/false
+let isDragon = true
+let isKnight: Bool = false
+
+//Логические операторы
+/*
+ !a - логическое НЕ
+ a && b - логическое И
+ a || b - логическое ИЛИ
+ */
+
+// typealias - оператор для создания псевдонима типа
+typealias AgeType = UInt8
+var myAge: AgeType = 29
+
+//type(of:) - функция, чтоб узнать тип данных
+type(of: myAge)
+type(of: namesDragon)
+
+
+
+
+
+
+
+
+
+
+
+//Решение задач по учебнику Усова
+
+//Задача 1. Объявите константу с именем myConst и проинициализируйте ей текстовое значение "this is my first const"
+let myConst = "this is my first const"
+
+//Задача 2. Объявите переменную с именем myVariable и проинициализируйте ей числовое значение 1408
+var myVariable = 1408
+
+//Задача 3. Выведите на консоль значение константы myConst
+print(myConst)
+
+//Задача 5. Исправть код
+/*
+age = 19
+print(age)
+age = 20
+print(age)
+*/
+var age = 19
+print(age)
+age = 20
+print(age)
