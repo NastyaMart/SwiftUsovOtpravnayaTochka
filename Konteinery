@@ -1,0 +1,80 @@
+Часть 2. Контейнерные типы данных
+
+***** Кортеж *****
+//Создание кортежа. Неявное
+let myProgramStatus = (200, "In work", true)
+// Явное объявление кортежа
+var floatStatus: (Float, String, Bool) = (200.2, "In work", true)
+//Лучше не делать кортеж больше 7 элементов
+
+// Инициализация значений в параметры
+let (statusCode, statusText, statusConnect) = myProgramStatus
+print(statusCode)
+print(statusText)
+print(statusConnect)
+
+var (myName, myAge) = ("Баба Яга", 342)
+//можно давать название переменной не для всех элементов кортежа
+var (floatCode, _, _) = floatStatus
+
+//Доступ к элементам кортежа через индексы
+myProgramStatus.0
+myProgramStatus.1
+myProgramStatus.2
+
+//Определение имен кортежа через литерал
+let statusTuple = (statusCode: 400, statusText: "Error", statusConnect: false)
+// обращение к элементам кортежа через имена
+statusTuple.statusCode
+statusTuple.statusText
+statusTuple.statusConnect
+statusTuple.0
+statusCode
+
+//бъявление кортежа с указанием имен элементов в описании типа
+var anotherStatusTuple: (statusCode: Int, statusText: String, statusConnect: Bool) = (200, "In work", true)
+
+///// Задачи \\\\\
+/* Задача 1
+Объявите константу и запишите в нее свое имя.
+Объявите переменную типа UInt8 и запишите в нее свой возраст.
+Объявите кортеж и явно определите его тип данных, как (name: String, age: Int).
+В первый элемент кортежа запишите значение константы с именем.
+Во второй элемент кортежа запишите значение из переменной с вашим возрастом.
+*/
+let name = "Анастасия"
+var age: UInt8 = 29
+var myData: (name: String, age: Int) = (name, Int(age))
+
+/* Задача 2
+ 1. Объявите кортеж, способный хранить три значения типа Int16.
+ 2. Одним выражением объявите две константы типа Int и проинициализуйте им произвольные значения.
+ 3. В первые два значения кортежа запишите значения из данных переменных, а в третий их сумму.
+ */
+var myTuple1: (Int16, Int16, Int16)
+let (a, b) = (7, 3)
+myTuple1 = (Int16(a), Int16(b), Int16(a + b))
+
+/* Задача 5
+ Вам даны две целочисленные переменные со значениями 12 и 21. Поменяйте их значения местами без использования буферной переменной и математических операций.
+ */
+var d = 12, e = 21
+(d, e) = (e, d)
+print("d = \(d), e = \(e)")
+/* Задача 6
+ 1) Создайте кортеж с двумя параметрами: ваш любимый фильм и ваше любимое число. Все элементы кортежа должны быть именованными.
+ 2) Одним выражением запишите каждый элемент кортежа в две константы. Проверьте значения параметров с помощью вывода в области результатов.
+ 3) Создайте псевдоним типа, используемого для первого кортежа, назовите его Man. Создайте второй кортеж типа Man, но описывающий другого человека (с другими значениями). Обратите внимание, что элементы кортежа так же должны иметь имена.
+ 4) Обменяйте значения в кортежах между собой.
+ 5) Создайте новый кортеж, элементами которого будут любимое число из первого кортежа, любимое число из второго кортежа и разница любимых чисел первого и второго кортежей.
+ */
+var myPerson: (favoriteFilm: String, favoriteNumber: Int) = ("1+1", 17)
+var (film, number) = (myPerson.favoriteFilm, myPerson.favoriteNumber)
+print("favorit film is \(film), favorite number is \(number)")
+typealias Man = (favoriteFilm: String, favoriteNumber: Int)
+var otherPerson: Man = ("kino", 25)
+var bufferTuple: Man
+bufferTuple = otherPerson
+otherPerson = myPerson
+myPerson = bufferTuple
+var newTuple = (myPerson.favoriteNumber, otherPerson.favoriteNumber, myPerson.favoriteNumber - otherPerson.favoriteNumber)
