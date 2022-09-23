@@ -78,3 +78,79 @@ bufferTuple = otherPerson
 otherPerson = myPerson
 myPerson = bufferTuple
 var newTuple = (myPerson.favoriteNumber, otherPerson.favoriteNumber, myPerson.favoriteNumber - otherPerson.favoriteNumber)
+
+
+***** Словари *****
+//Создание словаря НЕявно [ключ_1:значение_1, ключ_2:значение_2, ..., ключ_N:значение_N]
+var myDictionary1 = [200:"Success", 300:"Warning", 400:"Error"]
+//Создание словаря с помощью Dictionary(dictionaryLiteral:)
+//Dictionary(dictionaryLiteral:) - функция для создания словаря, принимающая список кортежей, каждый из которых определяет пару "ключ-значение"
+//Dictionary(dictionaryLiteral: (ключ_1, значение_1), (ключ_2, значение_2), ...,(ключ_N, значение_N))
+var myDictionary2 = Dictionary(dictionaryLiteral:(100, "сто"),(200,"двести"), (300, "триста"))
+//Создание словаря с помощью Dictionary(uniqueKeysWithValues:)
+//Dictionary(uniqueKeysWithValues:) - функция, позволяющая создать словарь на основе коллекции однотипных кортежей
+let baseCollection = [(2,5),(3,6),(1,4)]
+let newDictionary = Dictionary(uniqueKeysWithValues: baseCollection)
+//zip(_:_:)- функция для создания одной последовательности пар ключ-значение из двух произвольных последовательностей
+let nearestStarNames = ["Proxima Centauri", "Alpha Centauri A", "Alpha Centauri B"]
+let nearestStarDistances = [4.24, 4.37, 4.37]
+let starDistanceDict = Dictionary(uniqueKeysWithValues: zip(nearestStarNames, nearestStarDistances))
+// Явное задание словаря
+/* Полная форма записи:
+ let имяСловаря: Dictionary<T1,T2> = литерал_словаря
+Краткая форма записи:
+ let имяСловаря: [T1:T2] = литерал_словаря
+*/
+//взаимодействие с элементами словаря
+var countryDict = ["RUS":"Россия", "BEL":"Белоруссия", "UKR": "Украина"]
+var countryName = countryDict["BEL"]
+countryDict["RUS"] = "Российская Федерация"
+print(countryDict)
+//updateValue(_:forKey:) - метод для изменения значения элемента словаря. Возвращаает старое значение или nil. Создает новый элемент при обращении к несуществующему
+var oldValueOne = countryDict.updateValue("Республика Беларусь", forKey: "BEL")
+var oldValueTwo = countryDict.updateValue("Эстония", forKey:"EST")
+print(countryDict)
+//Добавление элемента в словарь
+countryDict["TUR"] = "Турция"
+print(countryDict)
+//removeValue(forKey:) метод для удаления значения
+countryDict.removeValue(forKey: "UKR")
+//Удалить элемент из словаря можно, присвои значение nil
+countryDict["EST"] = nil
+print(countryDict)
+//Создание пустого словаря
+let emptyDictionary: [String:Int] = [:]
+let anotherEmptyDictionary = Dictionary<String, Int>()
+//Базовые свойства и методы словарей
+//count - свойство, возвращает количество элементов в словаре
+countryDict.count
+//isEmpty - возвращает true, если словарь пустой
+countryDict.isEmpty
+emptyDictionary.isEmpty
+//keys - метод для получения ключей словаря
+starDistanceDict.keys
+//values - получение значений словаря
+starDistanceDict.values
+let myArray =  Array(starDistanceDict.values)
+//строка-коллекция символов
+//графем-кластер
+let thumbs = "\u{1f44d}"
+let blackSkin = "\u{1f3fd}"
+let combine1: Character = "\u{1f44d}\u{1f3fd}"
+let combine2 = "\u{1f44d}\u{65}"
+type(of: combine1)
+//starIndex - метод, возращающий индекс первого элемента
+let name1 = "e\u{301}lastic"
+let index1 = name1.startIndex
+print(index1)
+let firstChar = name1[index1]
+//endIndex позволяющее получить индекс, который следует за последним символом в строке
+let indexLastChar = name1.endIndex
+//index(before:) - метод, позволяет получить ндекс символа, предшествующего тому, индекс которого передан в качестве аргумента before
+let lastCharIndex = name1.index(before: indexLastChar)
+name1[lastCharIndex]
+//index(after:) - метод для получения индекса последующего символа
+//index(_:offsetBy:) - позволяет получить требуемый символ с учетом отступа. В качестве первого аргумента передается индекс графем-кластера, от которого будет происходить отсчет, а в качестве значения входного параметра offsetBy передается целое число, указывающее на отступ вправо
+let fourCharIndex = name1.index(name1.startIndex, offsetBy: 3)
+name1[fourCharIndex]
+name1.unicodeScalars
