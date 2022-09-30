@@ -92,3 +92,173 @@ default:
     break
 }
 
+
+//Операторы повторения while и repeat while
+var i = 1
+var resultSum = 0
+while i <= 10 {
+    resultSum += i
+    i += 1
+}
+print(resultSum)
+
+var j = 1
+var result = 0
+repeat {
+    result += j
+    j += 1
+} while j <= 10
+print(result)
+            
+// continue - оператор, предназначен для перехода к очередной итерации, игнорируя следующий за ним код
+var k = 0
+var sum = 0
+while k <= 10 {
+    k += 1
+    if k % 2 == 1 {
+        continue
+    }
+    sum += k
+}
+print(sum)
+
+// break оператор для досрочного завершения цикла
+let lastNum = 54
+var currentNum = 1
+var sumOfInts = 0
+while currentNum <= lastNum {
+    sumOfInts += currentNum
+    if sumOfInts > 450 {
+        print ("Хранилище заполнено. Последнее обработанное число - \(currentNum)")
+        break
+    }
+    currentNum += 1
+}
+
+
+***** Задачи *****
+
+/* Задача 1
+ Напишите код, который будет выводить на консоль персонализированное приветствие пользователю в зависимости от его имени.
+ Пусть в константе name хранится имя пользователя. Используя операторы управления (условия if и ветвления switch) реализуйте различный вывод на консоль в зависимости от значения в константе name
+ Покажите варианты решения с использованием switch и if. Определите вывод на консоль для трех произвольных имен, а так же в блоке «во всех остальных случаях» (default и else).
+ */
+// С использованием switch
+let name = "Nastya"
+switch name {
+case "Nastya":
+    print("Добрый день, Настенька")
+case "Diana":
+    print("Приветики, Диана!")
+case "Anna":
+    print("Анна, хорошего тебя дня")
+default:
+    print("Здрасте")
+}
+
+// С использование if-else
+let user = "Alex"
+if user == "Anna" {
+    print("Анна, хорошего тебя дня")
+} else if user == "Diana" {
+    print("Приветики, Диана!")
+} else if user == "Nastya" {
+    print("Добрый день, Настенька")
+} else {
+    print("Здрасте")
+}
+
+/* Задача 2
+ У вас есть логическая переменная open, которая может принять одно из двух доступных значений (true или false) var open = true или var open = false
+
+ Вам необходимо создать новую переменную типа String и инициализировать ей строковое значение:
+ — если open равно true, то инициализировать "открыто"
+ — если open равно false, то инициализировать "закрыто"
+ */
+var open: Bool = false
+if open {
+    print("открыто")
+} else {
+    print("закрыто")
+}
+
+/* Задача 3
+ Вам даны три переменные var1, var2 и var3 целочисленного типа Int
+ Составьте программу, в конце которой в константе result будет находиться наибольшее из трех целочисленных значений
+ */
+var (var1, var2, var3): (Int, Int, Int) = (78, -105, 214)
+var result: Int
+if var1 < var2 && var3 < var2 {
+    result = var2
+} else if var1 < var3 && var2 < var3 {
+    result = var3
+} else {
+    result = var1
+}
+print("max = \(result)")
+
+/* Задача 4
+ Вы имеете три переменные-кортежа, содержащие координаты точек
+ Напишите программу, которая определяет, может ли существовать треугольник с заданными координатами вершин
+ */
+var (a, b, c): ((Double, Double), (Double, Double), (Double, Double)) = ((1,6), (4, 9), (6, 0))
+let ab = sqrt(pow(b.0 - a.0, 2) + pow(b.1 - a.1, 2))
+let ac = sqrt(pow(c.0 - a.0, 2) + pow(c.1 - a.1, 2))
+let bc = sqrt(pow(b.0 - c.0, 2) + pow(b.1 - c.1, 2))
+
+if ab + ac > bc && ab + bc > ac && bc + ac > ab {
+    print ("Это треугольник")
+} else {
+    print("Не является треугольником")
+}
+
+/* Задача 5
+ Переменная lang может принимать 2 значения: "ru", "en". Если она имеет значение "ru", то в переменную days запишите массив дней недели на русском языке, а если имеет значение "en" – то на английском
+ Покажите решение задачи через конструкцию switch-case
+ Задача 6
+ Основано на предыдущем задании
+ У вас появилась дополнительная переменная chars, которая может принять два значения "up" и "down"
+ Доработайте конструкцию
+ */
+
+var lang = "ru"
+var chars = "up"
+var days: Array<String>
+switch lang {
+case "ru" where chars == "down":
+    days = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"]
+case "ru" where chars == "up":
+    days = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
+case "en" where chars == "down":
+    days = ["mo", "tu", "we", "th", "fr", "sa", "su"]
+case "en" where chars == "up":
+    days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]
+default:
+    days = ["Некорректное значание"]
+}
+print(days)
+
+/* Задача 7
+ Определите псевдоним Operation типу кортежа, содержащему три элемента со следующими именами: operandOne, operandTwo, operation.
+ Первые два — это числа с плавающей точкой. Они будут содержать операнды для выполнения операции.
+ Третий элемент — строковое значение типа Character. Оно будет содержать указатель на проводимую операцию. Всего может быть четыре вида операций: +, -, *, /.
+ 2) Создайте константу типа Operation и инициализируйте ей произвольное значение, к примеру (3.1, 33, "+")
+ 3) Используя конструкцию switch-case вычислите значение операции, указанной в элементе для операндов operandOne и operandTwo. Оператор switch должен корректно отрабатывать любую из четырех операций.
+ 4) Проверьте правильность работы конструкции по для следующих операций:
+ */
+typealias Operation = (operandOne: Double, operandTwo: Double, operation: Character)
+let vvod: Operation = (5, 2.5, "-")
+var res: Double = 0
+switch vvod.operation {
+case "+":
+    res = vvod.operandOne + vvod.operandTwo
+case "-":
+    res = vvod.operandOne - vvod.operandTwo
+case "*":
+    res = vvod.operandOne * vvod.operandTwo
+case "/":
+    res = vvod.operandOne / vvod.operandTwo
+default: break
+}
+print(res)
+
