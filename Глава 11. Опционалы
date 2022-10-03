@@ -1,0 +1,85 @@
+// Опционалный тип данных
+
+//Объявление опциональной переменной
+let optionalChar: Optional<Character> = "a"
+var xCoordinate: Int? = 12
+
+// Изменение значения не nil
+xCoordinate = nil
+
+var optionalVar = Optional("StringValue")
+optionalVar = nil
+type(of: optionalVar)
+
+// Опциональный кортеж
+var tuple: (code: Int, messege: String)? = nil
+tuple = (404, "Page not found")
+type(of: tuple)
+
+// опциональный элемент кортежа
+let tupleWithoptelements: (Int?, Int) = (nil, 100)
+tupleWithoptelements.0
+tupleWithoptelements.1
+
+//Принудительное извлечение опционала
+var optVar: Int? = 12
+var intVar = 34
+let result = optVar! + 34
+
+let optString: String? = "Anastasiya Martyusheva"
+let unwrapperString = optString!
+print("My name is \(unwrapperString)")
+
+//Проверка наличия значения
+var optOne: UInt? = nil
+var optTwo: UInt? = 32
+optOne != nil
+optTwo != nil
+
+var fiveMarkCount: Int? = 8
+var allCakesCount = 0
+if fiveMarkCount != nil {
+    let cakeForEachFiveMark = 2
+    allCakesCount = cakeForEachFiveMark * fiveMarkCount!
+}
+allCakesCount
+
+//опциональное связывание
+let userLogin: String? = nil
+if let userName = userLogin {
+    print("Name: \(userName)")
+} else {
+    print("Имя не введено")
+}
+
+let markCount: Int? = 8
+if let marks = markCount {
+    print("Всего \(marks) оценок")
+}
+
+var pointX: Int? = 101
+var pointY: Int? = 5
+if let _ = pointX, let _ = pointY {
+    print("Точка установлена на плоскости")
+}
+
+if let x = pointX, x > 100 {
+    print("Точка очень далеко от вас")
+}
+
+var coinsInNewChest = "140"
+var allCoinsCount = 1301
+if Int(coinsInNewChest) != nil {
+    allCoinsCount += Int(coinsInNewChest)!
+} else {
+    print("У нового дракона отсутствует золото")
+}
+//оптимальный способ того же
+if let coins = Int(coinsInNewChest) {
+    allCoinsCount += coins
+} else {
+    print("У нового дракона отсутствует золото")
+}
+ // объединение с nil
+let optionalInt: Int? = 30
+var mustHaveResult = optionalInt ?? 0
