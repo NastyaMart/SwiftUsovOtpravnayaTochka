@@ -83,3 +83,98 @@ if let coins = Int(coinsInNewChest) {
  // объединение с nil
 let optionalInt: Int? = 30
 var mustHaveResult = optionalInt ?? 0
+
+
+// Задачи
+/* Задача 5
+ 1) Создайте псевдоним типа String с именем Text
+ 2) Объявите три константы типа Text. Значения дух констант должны состоять только из цифр, а третьей — из букв и цифр
+ 3) С помощью оператора условия определите те константы, которые состоят только из цифр и выведите из на консоль
+ */
+typealias Text = String
+let constX: Text = "123"
+let constY: Text = "678"
+let constZ: Text = "f84"
+if let x = Int(constX) {
+    print(x)
+}
+if let y = Int(constY) {
+    print(y)
+}
+if let z = Int(constZ) {
+    print(z)
+}
+
+
+/* Задача 6
+ В задании используются результаты предыдущего задания
+ 1) Создайте псевдоним типа (numberOne: Text?, numberTwo: Text?) с именем TupleType.
+ 2) Создайте три переменные типа TupleType, содержащие следующие значения: ("190", "67"), ("100", nil), ("-65", "70").
+ 3) С помощью конструкции switch-case определите, какие из кортежей не содержат nil в своем составе и выведите значения их элементов на консоль
+ */
+typealias TupleType = (numberOne: Text?, numberTwo: Text?)
+var numX: TupleType = ("190", "67")
+var numY: TupleType = ("100", nil)
+var numZ: TupleType = ("-65", "70")
+if let x1 = numX.numberOne, let x2 = numX.numberTwo {
+    print("\(x1), \(x2)")
+}
+switch numX {
+case (let x1, let x2) where x1 != nil && x2 != nil:
+    print("\(x1!), \(x2!)")
+default:
+    break
+}
+
+
+
+/*Задача 7
+ Представьте, что вы являетесь преподавателем курсов по шахматам. Ваши занятия посещают ученики и в конце каждого занятия получаю оценку.
+ 1) Создайте словарь, который будет содержать информацию о ваших студентах и об их успехах.
+
+ Тип данных словаря — [String: [String: UInt]]
+ Индекс — это фамилия ученика.
+ Значение — еще один словарь, содержащий информацию о дате занятия и полученной оценке.
+ В вашем электронном журнале должна находиться информация о трех учениках, по две оценки для каждого. Фамилии и даты придумайте самостоятельно.
+ 2) Подсчитайте средний балл каждого студента, средний балл группы, и выведите информацию на консоль.
+ */
+var students: [String: [String: UInt]] = [:]
+students["Петров"] = ["05.10.2021": 3, "20.03.2022": 7]
+students["Иванов"] = ["05.10.2021": 4, "20.03.2022": 9]
+students["Васечкин"] = ["05.10.2021": 7, "20.03.2022": 4]
+
+var gradeAverageGroup: Float = 0 //средняя оценка группы
+var gradeCount = 0 //количество оценок
+
+for oneStudent in students {
+    var gradeAverageStudent: Float = 0
+    for lesson in oneStudent.value {
+        gradeAverageStudent += Float(lesson.value)
+        gradeAverageGroup += Float(lesson.value)
+        gradeCount += 1
+    }
+    gradeAverageStudent /= Float(oneStudent.value.count)
+    print("Студент \(oneStudent.key) имеет средний бал \(gradeAverageStudent)")
+}
+gradeAverageGroup /= Float(gradeCount)
+print("Группа студентов имеет средний балл \(gradeAverageGroup)")
+
+/* Задание 9
+ 1) Создайте псевдоним Coordinates для типа кортежа (alpha: Character?, num: Int?). Данный тип будет описывать координаты шахматной фигуры на игровом поле. Если вместо элементов кортежа стоит nil, значит фигура не находится на игровом поле.
+ 2) Создайте псевдоним Chessman для типа словаря [String:Coordinates]. Данный тип описывает шахматную фигуру на игровом поле. В ключе словаря должно хранится имя фигуры, например "White King", а в значении — кортеж, указывающий на координаты фигуры на игровом поле.
+ 3) Создайте переменный словарь figures типа Chessman и добавьте в него три произвольные фигуры, одна из которых не должна иметь координат.
+ 4) Создайте цикл, которая обходит всех элементы словаря (все фигуры), и проверяет, убита ли очередная фигура (элемент словаря figures), далее выводит на консоль информацию либо о координатах фигуры, либо о ее отсутствии на игровом поле.
+ */
+typealias Coordinates = (alpha: Character?, num: Int?)
+typealias Chessman = [String: Coordinates]
+var figures: Chessman = [:]
+figures["White King"] = (alpha: "B", num: 1)
+figures["White Queen"] = (alpha: nil, num: nil)
+figures["Black King"] = (alpha: "F", num: 6)
+for oneFigure in figures {
+    if oneFigure.value.0 != nil && oneFigure.value.1 != nil {
+        print("Фигура на поле")
+    }else{
+        print("Фигура не на поле")
+    }
+}
