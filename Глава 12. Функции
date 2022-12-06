@@ -1,0 +1,144 @@
+func printMessage() {
+    print("Сообщение принято")
+}
+printMessage()
+printMessage()
+
+func sumTwoInt(_ a: Int, _ b: Int) -> Int {
+    let result = a + b
+    print("Результат операции \(result)")
+    return result
+}
+sumTwoInt(6, 9)
+
+// функция со сквозным значением
+func changeValues(_ a: inout Int, _ b: inout Int) -> Void {
+    let tmp = a
+    a = b
+    b = tmp
+}
+var x = 150, y = 47
+changeValues(&x, &y)
+x
+y
+
+func returnMessage(code: Int, message: String) -> String {
+    var multableMessage = message
+    multableMessage += String(code)
+    return multableMessage
+}
+//фунция может являться аргументом другой функции
+print(returnMessage(code: 400, message: "Сервер недоступен. Код ошибки - "))
+
+
+
+//Функция с вариативным входным параметром
+func printRequestsString(codes: Int...) -> Void {
+    var codesString = ""
+    for oneCode in codes {
+        codesString += String(oneCode) + " "
+    }
+    print("Получены ответы - \(codesString)")
+}
+printRequestsString(codes: 600, 700, 800, 1000)
+printRequestsString(codes: 200, 500)
+
+// Функия возвращает кортеж
+func getCodeDescription(code: Int) -> (Int, String) {
+    let description: String
+    switch code {
+    case 1...100:
+        description = "Error"
+    case 101...200:
+        description = "Correct"
+    default:
+        description = "Unknown"
+    }
+    return(code, description)
+}
+getCodeDescription(code: 500)
+getCodeDescription(code: 100)
+
+//фунция со значением по умолчанию для входного параметра
+func returnMes (code: Int, message: String = "Код - ") -> String {
+    var mutableMessage = message
+    mutableMessage += String(code)
+    return mutableMessage
+    // или все тело функции можно заменить на message + String(code)
+}
+returnMes(code: 300)
+
+//Функция, которая возвращает значение функционального типа, то есть другую функцию
+func prinText() {
+    print("Функция вызвана")
+}
+func returnPrintTextFunction() -> () -> Void {
+    return prinText
+}
+
+print("Шаг 1")
+let newFunctionInLet = returnPrintTextFunction()
+print("Шаг 2")
+newFunctionInLet()
+print("Шаг 3")
+
+//Входное значение функционального типа
+func generateWallet(walletLenght: Int) -> [Int]{
+    let typesOfBanknotes = [50, 100, 500, 1000, 5000]
+    var wallet: [Int] = []
+    for _ in 1...walletLenght {
+        wallet.append(typesOfBanknotes.randomElement()!)
+    }
+    return wallet
+}
+func sumWallet(banknotesFunction wallet: (Int)-> [Int], walletLenght: Int) -> Int? {
+    let myWalletArray = wallet(walletLenght)
+    var sum: Int = 0
+    for oneBanknote in myWalletArray {
+        sum += oneBanknote
+    }
+    return sum
+}
+ //Функция с вложенной функцией
+ func oneStep(
+    coordinates: inout (Int, Int), stepType: String
+ ) -> Void {
+     func up(coords: inout (Int, Int)){
+         coords = (coords.0 + 1, coords.1)
+     }
+     func right(coords: inout (Int, Int)){
+         coords = (coords.0, coords.1 + 1)
+     }
+     func down(coords: inout (Int, Int)){
+         coords = (coords.0 - 1, coords.1)
+     }
+     func left(coords: inout (Int, Int)){
+         coords = (coords.0, coords.1 - 1)
+     }
+     
+     switch stepType{
+     case "up":
+         up(coords: &coordinates)
+     case "right":
+         right(coords: &coordinates)
+     case "down":
+         down(coords: &coordinates)
+     case "left":
+         left(coords: &coordinates)
+     default:
+         break
+     }
+ }
+var coordinates = (10, -5)
+oneStep(coordinates: &coordinates, stepType: "up")
+oneStep(coordinates: &coordinates, stepType: "right")
+coordinates
+
+//рекурсия
+func countdown(firstNum num: Int) -> Void {
+    print(num)
+    if num > 0 {
+        countdown(firstNum: num - 1)
+    }
+}
+countdown(firstNum: 4)
